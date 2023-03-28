@@ -5,7 +5,8 @@ namespace SecondLab
     public interface IViewMainForm : IView
     {
         void RenderingMenu(string menuName);
-        event Action SelectedMenuItem;
+      //  public delegate void Action(string message);
+       // event Action SelectedMenuItem;
         void ShowError(string message);
     }
 }

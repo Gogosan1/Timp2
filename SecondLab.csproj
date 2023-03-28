@@ -46,11 +46,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IPresenter.cs" />
-    <Compile Include="IView.cs" />
-    <Compile Include="IViewMainForm.cs" />
-    <Compile Include="IViewLoginForm.cs" />
-    <Compile Include="Model.cs" />
+    <Compile Include="contracts\Domain Contracts\IDomain.cs" />
+    <Compile Include="contracts\IApplicationController.cs" />
+    <Compile Include="contracts\Model contracts\IUserChecker.cs" />
+    <Compile Include="contracts\Presenter contracts\IPresenter.cs" />
+    <Compile Include="contracts\View contracts\IView.cs" />
+    <Compile Include="contracts\View contracts\IViewMainForm.cs" />
+    <Compile Include="contracts\View contracts\IViewLoginForm.cs" />
+    <Compile Include="Domain.cs" />
+    <Compile Include="MenuRender.cs" />
+    <Compile Include="UserChecker.cs" />
     <Compile Include="Presenter.cs" />
     <Compile Include="StartForm.cs">
       <SubType>Form</SubType>
@@ -97,6 +102,18 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Properties\keysPrint.png" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Files\fileAdminMenu.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Files\fileMenu.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Files\possibleUsersFile.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -14,6 +14,7 @@ namespace SecondLab
 
         public void RenderingMenu(string menuFile)
         {
+            menuStrip.Items.Clear();
             List<string> lines = new List<string>();
             int counterOfLines = 0;
             var menuItems = new List<ToolStripMenuItem>();
@@ -26,7 +27,7 @@ namespace SecondLab
                 menuItems.Add(new ToolStripMenuItem(parshItem[1]));
             }
 
-
+            
             for (int i = counterOfLines - 1; i >= 0; i--)
             {
                 string[] parshItem1 = lines[i].Split(' ');
@@ -53,6 +54,7 @@ namespace SecondLab
                 
             }
         }
+
         public void ShowError(string message)
         {
         }
@@ -61,6 +63,12 @@ namespace SecondLab
         {
             this.ShowDialog();
         }
+        public delegate void Action(string message);
         public event Action SelectedMenuItem;
+
+        private void menuStrip_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+            SelectedMenuItem?.Invoke("Something");
+        }
     }
 }

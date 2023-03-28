@@ -18,7 +18,7 @@ namespace SecondLab
             Application.SetCompatibleTextRenderingDefault(false);
 
 
-            var presenter = new Presenter(new StartForm(), new MainForm(), new Model());
+            var presenter = new Presenter(new StartForm(), /*new MainForm(),*/ new UserChecker());
             presenter.StartWindowRun();
         }
     }

@@ -10,3 +10,6 @@ C:\Users\pakan\Desktop\Универ\4 семак\тимп\SecondLab\obj\Debug\Se
 C:\Users\pakan\Desktop\Универ\4 семак\тимп\SecondLab\obj\Debug\SecondLab.csproj.CoreCompileInputs.cache
 C:\Users\pakan\Desktop\Универ\4 семак\тимп\SecondLab\obj\Debug\SecondLab.exe
 C:\Users\pakan\Desktop\Универ\4 семак\тимп\SecondLab\obj\Debug\SecondLab.pdb
+C:\Users\pakan\Desktop\Универ\4 семак\тимп\SecondLab\bin\Debug\Files\fileAdminMenu.txt
+C:\Users\pakan\Desktop\Универ\4 семак\тимп\SecondLab\bin\Debug\Files\fileMenu.txt
+C:\Users\pakan\Desktop\Универ\4 семак\тимп\SecondLab\bin\Debug\Files\possibleUsersFile.txt

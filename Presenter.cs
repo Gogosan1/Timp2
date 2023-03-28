@@ -1,20 +1,19 @@
-﻿using System;
-using System.Linq.Expressions;
-using System.Windows.Forms;
+﻿using SecondLab.contracts.Model_contracts;
+using System;
 
 namespace SecondLab
 {
     public class Presenter : IPresenter
     {
-        public Presenter(IViewLoginForm startForm, IViewMainForm mainForm, Model model)
+        public Presenter(IViewLoginForm startForm,/* IViewMainForm mainForm,*/ IUserChecker userChecker)
         {
             this.startForm = startForm;
-            this.mainForm = mainForm;
-            this.model = model;
+           // this.mainForm = mainForm;
+            this.userChecker = userChecker;
 
             startForm.Login += () => Login(startForm.UserLogin, startForm.Password);
            //model.ShowMainForm += () => StartWindowClose();
-            model.ShowMainForm += () => MainWindowRun(model.MenuFile);
+            userChecker.ShowMainForm += () => MainWindowRun(userChecker.MenuFile);
 
         }
 
@@ -31,11 +30,13 @@ namespace SecondLab
 
         public void MainWindowRun(string menuFile)
         {
+           
             CreateMenu(menuFile);
             mainForm.Show();
         }
         public void CreateMenu(string menuFile)
         {
+ 
             mainForm.RenderingMenu(menuFile);
         }
 
@@ -43,17 +44,18 @@ namespace SecondLab
         {
             try
             {
-                model.IsUserExist(userLogin, userPassword);
+                userChecker.IsUserExist(userLogin, userPassword);
             }
             catch(Exception mes)
             {
                 startForm.ShowError(mes.Message);
+                startForm.Close();
             }
         }
 
 
         private readonly IViewLoginForm startForm;
-        private IViewMainForm mainForm;
-        private Model model;
+        private MainForm mainForm = new MainForm();
+        private IUserChecker userChecker;
     }
 }

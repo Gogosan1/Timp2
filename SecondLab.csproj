@@ -46,10 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="contracts\Domain Contracts\IDomain.cs" />
-    <Compile Include="contracts\IApplicationController.cs" />
     <Compile Include="contracts\Model contracts\IUserChecker.cs" />
-    <Compile Include="contracts\Presenter contracts\IPresenter.cs" />
     <Compile Include="contracts\View contracts\IView.cs" />
     <Compile Include="contracts\View contracts\IViewMainForm.cs" />
     <Compile Include="contracts\View contracts\IViewLoginForm.cs" />

@@ -28,25 +28,25 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.menu = new System.Windows.Forms.MenuStrip();
+            this.mainMenu = new System.Windows.Forms.MenuStrip();
             this.SuspendLayout();
             // 
-            // menu
+            // mainMenu
             // 
-            this.menu.GripStyle = System.Windows.Forms.ToolStripGripStyle.Visible;
-            this.menu.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.menu.Location = new System.Drawing.Point(0, 0);
-            this.menu.Name = "menu";
-            this.menu.Size = new System.Drawing.Size(800, 28);
-            this.menu.TabIndex = 1;
-            this.menu.Text = "menuStrip1";
+            this.mainMenu.GripStyle = System.Windows.Forms.ToolStripGripStyle.Visible;
+            this.mainMenu.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.mainMenu.Location = new System.Drawing.Point(0, 0);
+            this.mainMenu.Name = "mainMenu";
+            this.mainMenu.Size = new System.Drawing.Size(800, 28);
+            this.mainMenu.TabIndex = 1;
+            this.mainMenu.Text = "menuStrip1";
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 151);
-            this.Controls.Add(this.menu);
+            this.Controls.Add(this.mainMenu);
             this.MaximizeBox = false;
             this.Name = "MainForm";
             this.Text = "АИС Отдел кадров";
@@ -56,6 +56,6 @@
         }
 
         #endregion
-        private System.Windows.Forms.MenuStrip menu;
+        private System.Windows.Forms.MenuStrip mainMenu;
     }
 }

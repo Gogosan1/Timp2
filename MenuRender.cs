@@ -1,116 +1,103 @@
-﻿/*using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Reflection;
-using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using System;
 
-namespace SecondLab
-{
+namespace SecondLab 
+{ 
     public class MenuRender
-    {
-        private List<MenuItem> mainItems;
-        private string[] Errors;
+    { 
+        public MenuStrip menu { get; private set; }
+        public event Action<string> ClickMenuItem;
 
-        private string[] SplitLine(string line, int lineNumber)
-        {
-            string[] split = line.Split(' ');
-            if (split.Length == 3 || split.Length == 4)
-                return split;
-            throw new Exception($"Ошибка при считывании строки {lineNumber + 1}");
+        public MenuRender(string menuFile) 
+        { 
+            menu = new MenuStrip();
+            menu.Items.Clear();
+
+            List<string> lines = new List<string>();
+            int counterOfLines = 0;
+            var menuItems = new List<ToolStripMenuItem>();
+            StreamReader streamReader = new StreamReader(menuFile);
+
+            // создание всех элементов меню
+            while (!streamReader.EndOfStream)
+            {
+                var line = streamReader.ReadLine();
+                if (!IsLineCorrect(line))
+                {
+                    throw new Exception($"Файл: {menuFile} содержит строку не верного формата.\n" +
+                        $"Этa строка находиться под номером {counterOfLines}.");
+                }
+                lines.Add(line);
+                string[] parshItem = lines[counterOfLines].Split(' ');
+                counterOfLines++;
+
+                var menuItem = new ToolStripMenuItem();
+                menuItem.Text = parshItem[1];
+
+                switch (Convert.ToInt32(parshItem[2]))
+                {
+                    case 1:
+                        menuItem.Enabled = false;
+                        break;
+                    case 2:
+                        menuItem.Enabled = false;
+                        menuItem.Visible = false;
+                        break;
+                    default:
+                        menuItem.Enabled = true;
+                        break;
+                }
+                // добавление обработчиков
+                if (parshItem.Length > 3)
+                {
+                    menuItem.Click += (s, e) => ClickMenuItem.Invoke(parshItem[3]);
+                }
+             
+
+                menuItems.Add(menuItem);
+            }
+
+            // добавление всех элементов низшего ранга по уровню иерархии
+            for (int i = counterOfLines - 1; i >= 0; i--)
+            {
+                string[] parshItem1 = lines[i].Split(' ');
+
+                for (int j = i - 1; j >= 0; j--)
+                {
+                    string[] parshItem2 = lines[j].Split(' ');
+                    if (Convert.ToInt32(parshItem1[0]) - 1 == Convert.ToInt32(parshItem2[0]))
+                    {
+                        menuItems[j].DropDownItems.Insert(0, menuItems[i]);
+                        break;
+                    }
+
+                }
+
+            }
+
+            // Добавление всех элементов меню в само меню
+            for (int i = 0; i < counterOfLines; i++)
+            {
+                string[] parshItem1 = lines[i].Split(' ');
+
+                if (parshItem1[0] == "0")
+                    menu.Items.Add(menuItems[i]);
+
+            }
         }
-        private bool IsSplitCorrect(string[] split)
+
+        private bool IsLineCorrect(string line)
         {
-            if (split.Length == 3 || split.Length == 4)
+            if (line != null && (line.Split(' ').Length == 3 || line.Split(' ').Length == 4))
                 return true;
             else
                 return false;
         }
 
-        public MenuRender(string pathToMenuFile)
-        {
-            string[] lines = File.ReadAllLines(pathToMenuFile);
-            Errors = new string[lines.Length];
-
-            if (lines == null || lines.Length == 0)
-                throw new ArgumentNullException(nameof(pathToMenuFile));
-
-            int lineNumber = 0, counterOfLevelIerarchy = 0;
-            string line = lines[lineNumber];
-            string[] split;
-
-            split = line.Split(' ');
-
-            mainItems = new List<MenuItem>();
-            var subListOfItems = mainItems;
-            var lastReadItem = new MenuItem();
-
-            while (lines.Length > lineNumber)
-            {
-                if (IsSplitCorrect(split))
-                {
-                    var titleStep = Int32.Parse(split[0]);
-
-                    if (titleStep == counterOfLevelIerarchy)
-                    {
-                        subListOfItems.Add(CreateMenuItem(line, commands));
-                        lastReadItem = subListOfItems[subListOfItems.Count - 1];
-                    }
-                    else if (titleStep == counterOfLevelIerarchy + 1)
-                    {
-                        counterOfLevelIerarchy++;
-                        subListOfItems = new List<MenuItem>();
-                        subListOfItems.Add(CreateMenuItem(line, commands));
-                        lastReadItem.Items = subListOfItems;
-                        lastReadItem = subListOfItems[subListOfItems.Count - 1];
-                    }
-                    else if (titleStep < counterOfLevelIerarchy && titleStep >= 0)
-                    {
-                        counterOfLevelIerarchy = titleStep;
-
-                        subListOfItems = mainItems;
-                        for (int i = 0; i < titleStep; i++)
-                        {
-                            if (subListOfItems is null) throw new Exception("пока что говно");
-                            lastReadItem = subListOfItems[subListOfItems.Count - 1];
-                            subListOfItems = subListOfItems[subListOfItems.Count - 1].Items as List<MenuItem>;
-                        }
-
-                        if (subListOfItems is null) throw new Exception("пока что говно");
-
-                        subListOfItems.Add(CreateMenuItem(line, commands));
-                    }
-                    else
-                    {
-                        throw new Exception("пока что говно"); ;
-                    }
-                }
-
-                lineNumber++;
-                if (lines.Length > lineNumber)
-                {
-                    line = lines[lineNumber];
-                    split = line.Split();
-                }
-            }
-        }
-
-        private static MenuItem CreateMenuItem(string line, Dictionary<string, ReactiveCommand<string, Unit>> commands)
-        {
-            var splitLine = line.Split();
-            return new MenuItem
-            {
-                Header = splitLine[1],
-                IsEnabled = splitLine[2] != "1",
-                IsVisible = splitLine[2] != "2",
-                CommandParameter = splitLine[1],
-                Command = commands.ContainsKey(splitLine[3]) ? commands[splitLine[3]] : null,
-            };
-        }
 
     }
+
 }
-*/

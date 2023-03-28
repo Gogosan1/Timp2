@@ -12,22 +12,54 @@ namespace SecondLab
             InitializeComponent();
         }
 
+        private bool IsLineCorrect(string line)
+        {
+            if (line != null && (line.Split(' ').Length == 3 || line.Split(' ').Length == 4)) 
+                return true;
+            else
+                return false;
+        }
+
+
         public void RenderingMenu(string menuFile)
         {
-            menuStrip.Items.Clear();
+            menu.Items.Clear();
+            
             List<string> lines = new List<string>();
             int counterOfLines = 0;
             var menuItems = new List<ToolStripMenuItem>();
             StreamReader streamReader = new StreamReader(menuFile);
+
+            // создание всех элементов меню
             while (!streamReader.EndOfStream)
             {
+                // проверить что строка считалась корректно IsLineCorrect(line);
+
                 lines.Add(streamReader.ReadLine());
                 string[] parshItem = lines[counterOfLines].Split(' ');
                 counterOfLines++;
-                menuItems.Add(new ToolStripMenuItem(parshItem[1]));
+
+                var menuItem = new ToolStripMenuItem();
+                menuItem.Text = parshItem[1];
+
+                switch (Convert.ToInt32(parshItem[2]))
+                {
+                    case 1:
+                        menuItem.Enabled = false;
+                        break;
+                    case 2:
+                        menuItem.Enabled = false;
+                        menuItem.Visible = false;
+                        break;
+                    default:
+                        menuItem.Enabled = true;
+                        break;
+                }
+                menuItems.Add(menuItem);
             }
 
             
+            // добавление всех элементов меню в само меню
             for (int i = counterOfLines - 1; i >= 0; i--)
             {
                 string[] parshItem1 = lines[i].Split(' ');
@@ -37,23 +69,45 @@ namespace SecondLab
                     string[] parshItem2 = lines[j].Split(' ');
                     if (Convert.ToInt32(parshItem1[0]) - 1 == Convert.ToInt32(parshItem2[0]))
                     {
-
-                        menuItems[j].DropDownItems.Add(menuItems[i]);
+                        menuItems[j].DropDownItems.Insert(0,menuItems[i]);
                         break;
                     }
                             
                 }
                 
             }
+
+
             for (int i = 0; i < counterOfLines; i++)
             {
                 string[] parshItem1 = lines[i].Split(' ');
 
                 if (parshItem1[0] == "0")
-                    menuStrip.Items.Add(menuItems[i]);
+                    menu.Items.Add(menuItems[i]);
                 
             }
+
+
+
+
+
+
+
         }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         public void ShowError(string message)
         {

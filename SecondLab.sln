@@ -5,6 +5,8 @@ VisualStudioVersion = 17.3.32929.385
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SecondLab", "SecondLab.csproj", "{DFDEA8AE-9180-487E-AC80-0D0DEDF5CD16}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MenuRendering", "..\MenuRendering\MenuRendering.csproj", "{490C610F-EA8A-4C2B-BD69-7F134C7C3BC8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{DFDEA8AE-9180-487E-AC80-0D0DEDF5CD16}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DFDEA8AE-9180-487E-AC80-0D0DEDF5CD16}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DFDEA8AE-9180-487E-AC80-0D0DEDF5CD16}.Release|Any CPU.Build.0 = Release|Any CPU
+		{490C610F-EA8A-4C2B-BD69-7F134C7C3BC8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{490C610F-EA8A-4C2B-BD69-7F134C7C3BC8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{490C610F-EA8A-4C2B-BD69-7F134C7C3BC8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{490C610F-EA8A-4C2B-BD69-7F134C7C3BC8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

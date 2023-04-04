@@ -50,8 +50,6 @@
     <Compile Include="contracts\View contracts\IView.cs" />
     <Compile Include="contracts\View contracts\IViewMainForm.cs" />
     <Compile Include="contracts\View contracts\IViewLoginForm.cs" />
-    <Compile Include="Domain.cs" />
-    <Compile Include="MenuRender.cs" />
     <Compile Include="UserChecker.cs" />
     <Compile Include="Presenter.cs" />
     <Compile Include="StartForm.cs">
@@ -100,7 +98,12 @@
   <ItemGroup>
     <None Include="Properties\keysPrint.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\MenuRendering\MenuRendering.csproj">
+      <Project>{490C610F-EA8A-4C2B-BD69-7F134C7C3BC8}</Project>
+      <Name>MenuRendering</Name>
+    </ProjectReference>
+  </ItemGroup>
   <ItemGroup>
     <Content Include="Files\fileAdminMenu.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
